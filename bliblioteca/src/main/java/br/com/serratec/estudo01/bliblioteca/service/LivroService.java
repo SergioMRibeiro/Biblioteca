@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import br.com.serratec.estudo01.bliblioteca.domain.Livro;
+import br.com.serratec.estudo01.bliblioteca.exeptions.LivroIdInvalidoException;
 
 @Service
 public class LivroService {
@@ -20,6 +21,16 @@ public class LivroService {
 	
 	public List<Livro> mostrarLivros(){
 		return cache;
+	}
+	
+	public void adicionarLivro(Livro novoLivro) throws LivroIdInvalidoException {
+		if(novoLivro.getId() < 0 ) validacao(novoLivro.getId());
+		cache.add(novoLivro);
+	}
+
+	private void validacao(Integer id) throws LivroIdInvalidoException {
+		if(id < 0 ) throw new LivroIdInvalidoException(id);
+		
 	}
 	
 }
