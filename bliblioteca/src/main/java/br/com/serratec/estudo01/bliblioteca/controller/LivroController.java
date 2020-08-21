@@ -3,6 +3,7 @@ package br.com.serratec.estudo01.bliblioteca.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,14 @@ public class LivroController {
 	
 	@Autowired
 	private LivroService livroService;
+	
+	@Value("${residencia-classe-software}")
+	private String minhaProp;
+	
+	@GetMapping("/prop")
+	public String propriedade() {
+		return minhaProp + " Teste usando devtools";
+	}
 	
 	@RequestMapping("/teste")
 	public String dandoUmOi() {
